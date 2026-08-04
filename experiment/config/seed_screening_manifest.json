@@ -1,0 +1,17 @@
+{
+  "rule": "A seed is accepted only when the t=0 graph is connected in S3, S5, and S7. Screening uses environment feasibility only and never optimizer outcomes.",
+  "preferred_final_candidates": [7, 17, 29, 42, 63, 88, 99, 123, 157, 211],
+  "accepted_final_seeds": [42, 88, 99, 123, 219, 220, 221, 226, 229, 236],
+  "rejected_preferred_seeds": {
+    "7": "S5 disconnected at t=0",
+    "17": "S3 disconnected at t=0",
+    "29": "S3 disconnected at t=0",
+    "63": "S3 disconnected at t=0",
+    "157": "S3 disconnected at t=0",
+    "211": "S3 disconnected at t=0"
+  },
+  "calibration_seed_candidates": [314159, 271828],
+  "accepted_calibration_seeds": [314160, 271830],
+  "screened_on": "2026-07-26",
+  "selection_independent_of_algorithm_results": true
+}

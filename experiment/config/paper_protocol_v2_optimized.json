@@ -1,0 +1,84 @@
+{
+  "protocol": {
+    "name": "independent-map-paired-v2",
+    "status": "calibrated",
+    "candidate_constructions_per_run": 100000,
+    "calibration_environment_seeds": [
+      314160,
+      271830
+    ],
+    "calibration_optimizer_seeds": [
+      9100,
+      9101,
+      9102,
+      9103,
+      9104
+    ],
+    "final_environment_seeds": [
+      42,
+      88,
+      99,
+      123,
+      219,
+      220,
+      221,
+      226,
+      229,
+      236
+    ],
+    "final_optimizer_seeds": [
+      2000,
+      2001,
+      2002,
+      2003,
+      2004
+    ],
+    "selection_rule": "feasibility, median normalized cost, variance, CPU time",
+    "calibration_results": "calibration_optimized/calibration_results.csv",
+    "calibration_ranking": "calibration_optimized/calibration_ranking.csv",
+    "calibration_results_sha256": "505edae94fb0258cd24f66572555485f225888e1a975e43b52f1339f25692743"
+  },
+  "ga": {
+    "adaptive_mut_boost": 2.0,
+    "crossover_ops": [
+      "ox1",
+      "pmx",
+      "erx"
+    ],
+    "crossover_probs": [
+      0.45,
+      0.25,
+      0.3
+    ],
+    "crossover_rate": 0.95,
+    "early_stop_patience": null,
+    "elitism_frac": 0.02,
+    "exhaustive_final_max_n": 25,
+    "final_refine_best": true,
+    "final_refine_candidate_k": 20,
+    "fitness_fn_authoritative": true,
+    "generations": 399,
+    "initial_local_search_frac": 0.15,
+    "inject_after": 60,
+    "inject_frac": 0.2,
+    "local_search_candidate_k": 12,
+    "local_search_top_frac": 0.05,
+    "mutation_rate": 0.2,
+    "or_opt_every_n": 5,
+    "pop_size": 250,
+    "stagnation_window": 30,
+    "tournament_k": 3,
+    "two_opt_every_n": 5,
+    "two_opt_max_iter": 75
+  },
+  "aco": {
+    "alpha": 2.0,
+    "beta": 3.0,
+    "candidate_list_size": 20,
+    "max_iter": 400,
+    "num_ants": 250,
+    "q0": 0.7,
+    "rho_global": 0.05,
+    "rho_local": 0.02
+  }
+}

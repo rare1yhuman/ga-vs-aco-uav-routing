@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+*.egg-info/
+
+# Regenerable experiment outputs (see README for how to regenerate)
+experiment/results/
+experiment/calibration/
+experiment/calibration_optimized/
+experiment/calibration_shards/
+experiment/evidence/
+
+# Backups / run logs
+archives/
+*.log
+
+# Paper, notes, and planning docs (out of scope for this repo)
+manuscript/
+paper_explainer/
+literature/
+notes/
+IMPLEMENTATION_PLAN.md
+DIGITALOCEAN_GUIDE.md
+
+# OS / editor cruft
+.DS_Store
+.vscode/
+.idea/

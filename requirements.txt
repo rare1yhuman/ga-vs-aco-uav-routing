@@ -1,0 +1,10 @@
+numpy
+scipy
+pandas
+matplotlib
+seaborn
+networkx
+tqdm
+rich
+plotext
+python-docx

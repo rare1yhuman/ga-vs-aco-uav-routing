@@ -1,0 +1,43 @@
+{
+  "protocol": {
+    "name": "paper-quality-fair-speed-v1",
+    "status": "frozen_for_next_overnight_run",
+    "selection_basis": "A priori defaults plus code-level efficiency fixes. Not selected from final A-J outcomes.",
+    "primary_claim": "MGA is evaluated for comparable route quality and lower optimization time against ACO under the same objective, seeds, feasibility rules, and run budget."
+  },
+  "ga": {
+    "pop_size": 200,
+    "generations": 500,
+    "crossover_rate": 0.85,
+    "mutation_rate": 0.15,
+    "tournament_k": 7,
+    "elitism_frac": 0.05,
+    "two_opt_max_iter": 150,
+    "two_opt_every_n": 3,
+    "or_opt_every_n": 5,
+    "local_search_top_frac": 0.1,
+    "initial_local_search_frac": 0.15,
+    "local_search_candidate_k": 8,
+    "final_refine_candidate_k": 20,
+    "exhaustive_final_max_n": 25,
+    "final_refine_best": true,
+    "early_stop_patience": null,
+    "stagnation_window": 25,
+    "adaptive_mut_boost": 3.0,
+    "inject_frac": 0.2,
+    "inject_after": 50,
+    "crossover_ops": ["ox1", "pmx", "erx"],
+    "crossover_probs": [0.45, 0.25, 0.3],
+    "dynamic_risk_weight": 1.0
+  },
+  "aco": {
+    "num_ants": 200,
+    "max_iter": 500,
+    "alpha": 1.0,
+    "beta": 2.0,
+    "rho_global": 0.1,
+    "rho_local": 0.01,
+    "q0": 0.9,
+    "candidate_list_size": 15
+  }
+}

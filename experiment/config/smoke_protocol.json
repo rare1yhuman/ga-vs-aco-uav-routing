@@ -1,0 +1,40 @@
+{
+  "protocol": {
+    "name": "v2-smoke-only",
+    "status": "provisional",
+    "candidate_constructions_per_run": 100
+  },
+  "ga": {
+    "pop_size": 10,
+    "generations": 9,
+    "crossover_rate": 0.85,
+    "mutation_rate": 0.15,
+    "tournament_k": 3,
+    "elitism_frac": 0.1,
+    "two_opt_max_iter": 10,
+    "two_opt_every_n": 3,
+    "or_opt_every_n": 5,
+    "local_search_top_frac": 0.1,
+    "initial_local_search_frac": 0.1,
+    "local_search_candidate_k": 4,
+    "final_refine_candidate_k": 4,
+    "exhaustive_final_max_n": 10,
+    "final_refine_best": false,
+    "early_stop_patience": null,
+    "stagnation_window": 5,
+    "adaptive_mut_boost": 2.0,
+    "inject_frac": 0.1,
+    "inject_after": 8,
+    "fitness_fn_authoritative": true
+  },
+  "aco": {
+    "num_ants": 10,
+    "max_iter": 10,
+    "alpha": 1.0,
+    "beta": 2.0,
+    "rho_global": 0.1,
+    "rho_local": 0.01,
+    "q0": 0.9,
+    "candidate_list_size": 10
+  }
+}
