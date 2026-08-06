@@ -9,6 +9,9 @@ Authors: Rishi Mandal, Shilpi Khanna, Santripti Bajpai
 Dept. of IT, Shri Ramswaroop Memorial College of Engineering and Management,
 Lucknow.
 
+The code in this repository was written by Rishi Mandal. The study it
+supports is joint work with the co-authors above.
+
 ## Layout
 
 ```
