@@ -824,11 +824,12 @@ def _write_report(
 
 def _write_latex_table(path: Path, family: pd.DataFrame) -> None:
     lines = [
-        r"\begin{table*}[t]",
+        r"\begin{table}[t]",
         r"\centering",
+        r"\scriptsize",
         r"\caption{Map-level comparison under the frozen equal-budget protocol. Positive gain and speedup favor MGA.}",
         r"\label{tab:main-results}",
-        r"\setlength{\tabcolsep}{4.0pt}",
+        r"\setlength{\tabcolsep}{2.2pt}",
         r"\begin{tabular}{lrrrrrrr}",
         r"\toprule",
         r"Family & MGA cost & ACO cost & Gain (\%) & 95\% CI & W/T/L & $p_{\mathrm{Holm}}$ & CPU ratio \\",
@@ -843,7 +844,7 @@ def _write_latex_table(path: Path, family: pd.DataFrame) -> None:
             f"{row.cost_p_holm:.4f} & "
             f"{row.median_cpu_speedup:.2f}$\\times$ \\\\"
         )
-    lines.extend([r"\bottomrule", r"\end{tabular}", r"\end{table*}", ""])
+    lines.extend([r"\bottomrule", r"\end{tabular}", r"\end{table}", ""])
     path.write_text("\n".join(lines))
 
 

@@ -156,15 +156,13 @@ def _protocol_overview(
     output_dir: Path,
     data_dir: Path,
 ) -> None:
-    fig = plt.figure(figsize=(7.15, 2.35))
-    grid = fig.add_gridspec(1, 3, width_ratios=[1.05, 1.05, 1.3], wspace=0.25)
-
-    environment_axis = fig.add_subplot(grid[0, 0])
+    # Panel (a): shared environment
+    fig = plt.figure(figsize=(2.55, 2.25))
+    environment_axis = fig.add_subplot(111)
     environment_axis.set_xlim(0, 1)
     environment_axis.set_ylim(0, 1)
     environment_axis.axis("off")
     _panel_label(environment_axis, "(a)")
-    environment_axis.set_title("Shared UAV environment", pad=4)
     for coordinate in np.linspace(0.08, 0.92, 8):
         environment_axis.plot(
             [0.08, 0.92],
@@ -237,13 +235,15 @@ def _protocol_overview(
         va="bottom",
         fontsize=6.4,
     )
+    _save(fig, output_dir, "fig1_problem_protocol_a")
 
-    model_axis = fig.add_subplot(grid[0, 1])
+    # Panel (b): controlled algorithm comparison
+    fig = plt.figure(figsize=(2.55, 2.25))
+    model_axis = fig.add_subplot(111)
     model_axis.set_xlim(0, 1)
     model_axis.set_ylim(0, 1)
     model_axis.axis("off")
     _panel_label(model_axis, "(b)")
-    model_axis.set_title("Controlled algorithm comparison", pad=4)
     _box(
         model_axis,
         (0.02, 0.59),
@@ -274,23 +274,26 @@ def _protocol_overview(
     )
     _box(
         model_axis,
-        (0.25, 0.08),
-        0.50,
+        (0.13, 0.08),
+        0.74,
         0.14,
         "100,000 constructions per run",
         facecolor="#EDF7F2",
         edgecolor=COLORS["positive"],
+        fontsize=6.3,
     )
     _arrow(model_axis, (0.21, 0.59), (0.42, 0.50))
     _arrow(model_axis, (0.79, 0.59), (0.58, 0.50))
     _arrow(model_axis, (0.50, 0.34), (0.50, 0.22))
+    _save(fig, output_dir, "fig1_problem_protocol_b")
 
-    protocol_axis = fig.add_subplot(grid[0, 2])
+    # Panel (c): held-out, paired evaluation protocol
+    fig = plt.figure(figsize=(3.05, 2.25))
+    protocol_axis = fig.add_subplot(111)
     protocol_axis.set_xlim(0, 1)
     protocol_axis.set_ylim(0, 1)
     protocol_axis.axis("off")
     _panel_label(protocol_axis, "(c)")
-    protocol_axis.set_title("Held-out, paired evaluation protocol", pad=4)
     labels = [
         ("480 calibration runs", "2 held-out maps\n24 configurations / algorithm"),
         ("freeze configuration", "disjoint final seeds\nSHA-256 recorded"),
@@ -317,8 +320,7 @@ def _protocol_overview(
                 (0.50, y),
                 (0.50, y_positions[index + 1] + 0.15),
             )
-    fig.subplots_adjust(left=0.035, right=0.99, top=0.87, bottom=0.06)
-    _save(fig, output_dir, "fig1_problem_protocol")
+    _save(fig, output_dir, "fig1_problem_protocol_c")
 
     protocol_data = pd.DataFrame(
         [
@@ -348,13 +350,8 @@ def _quality_and_scale(
     output_dir: Path,
     data_dir: Path,
 ) -> None:
-    fig, axes = plt.subplots(
-        1,
-        2,
-        figsize=(7.15, 3.05),
-        gridspec_kw={"width_ratios": [1.08, 1.0], "wspace": 0.31},
-    )
-    forest = axes[0]
+    # Panel (a): family forest plot
+    fig, forest = plt.subplots(figsize=(3.35, 3.1))
     ordered = family.set_index("family").loc[list(reversed(FAMILIES))]
     positions = np.arange(len(ordered))
     gains = ordered["median_cost_gain_pct"].to_numpy()
@@ -395,8 +392,10 @@ def _quality_and_scale(
         color=COLORS["positive"],
     )
     _panel_label(forest, "(a)")
+    _save(fig, output_dir, "fig2_quality_scale_a")
 
-    scale_axis = axes[1]
+    # Panel (b): scale interaction
+    fig, scale_axis = plt.subplots(figsize=(3.35, 3.1))
     layout = {
         "static": (0.0, 0.9, "Static"),
         "dynamic": (1.75, 2.65, "Dynamic"),
@@ -447,8 +446,8 @@ def _quality_and_scale(
     )
     scale_axis.grid(axis="y", color=COLORS["grid"], linewidth=0.5)
     _panel_label(scale_axis, "(b)")
-    fig.subplots_adjust(left=0.09, right=0.985, top=0.96, bottom=0.17)
-    _save(fig, output_dir, "fig2_quality_scale")
+    _save(fig, output_dir, "fig2_quality_scale_b")
+
     _write_figure_data(
         family,
         data_dir,
@@ -467,17 +466,12 @@ def _convergence_and_attainment(
     output_dir: Path,
     data_dir: Path,
 ) -> None:
-    fig, axes = plt.subplots(
-        1,
-        3,
-        figsize=(7.15, 2.55),
-        gridspec_kw={"wspace": 0.34},
-    )
-    for axis, family, panel in zip(
-        axes[:2],
-        ("S6", "S7"),
-        ("(a)", "(b)"),
+    # Panels (a)-(b): median regret to pooled map best, per family
+    for family, panel, stem_suffix in (
+        ("S6", "(a)", "a"),
+        ("S7", "(b)", "b"),
     ):
+        fig, axis = plt.subplots(figsize=(2.65, 2.45))
         family_data = convergence[convergence["family"] == family]
         for algorithm in ALGORITHMS:
             group = family_data[family_data["algo"] == algorithm]
@@ -495,16 +489,18 @@ def _convergence_and_attainment(
                 alpha=0.13,
                 linewidth=0,
             )
-        axis.set_title(f"{family}: {SCENARIO_FAMILIES[family]['label']}")
         axis.set_xlabel("Candidate constructions ($\\times 10^3$)")
         axis.set_ylabel("Regret to pooled map best (%)")
         axis.set_xlim(0, 100)
         axis.set_ylim(bottom=0)
         axis.grid(color=COLORS["grid"], linewidth=0.45)
         _panel_label(axis, panel)
-    axes[0].legend(frameon=False, loc="upper right")
+        if family == "S6":
+            axis.legend(frameon=False, loc="upper right")
+        _save(fig, output_dir, f"fig3_convergence_attainment_{stem_suffix}")
 
-    target_axis = axes[2]
+    # Panel (c): target-attainment fraction
+    fig, target_axis = plt.subplots(figsize=(2.95, 2.45))
     styles = {"S6": "-", "S7": "--"}
     for family in ("S6", "S7"):
         for algorithm in ALGORITHMS:
@@ -527,8 +523,8 @@ def _convergence_and_attainment(
     target_axis.grid(color=COLORS["grid"], linewidth=0.45)
     target_axis.legend(frameon=False, ncol=1, loc="lower right")
     _panel_label(target_axis, "(c)")
-    fig.subplots_adjust(left=0.07, right=0.99, top=0.88, bottom=0.2)
-    _save(fig, output_dir, "fig3_convergence_attainment")
+    _save(fig, output_dir, "fig3_convergence_attainment_c")
+
     _write_figure_data(
         convergence[convergence["family"].isin(["S6", "S7"])],
         data_dir,
@@ -547,13 +543,8 @@ def _runtime_advantage(
     output_dir: Path,
     data_dir: Path,
 ) -> None:
-    fig, axes = plt.subplots(
-        1,
-        3,
-        figsize=(7.15, 2.55),
-        gridspec_kw={"width_ratios": [1.05, 1.05, 0.9], "wspace": 0.4},
-    )
-    runtime_axis = axes[0]
+    # Panel (a): map-median CPU time, MGA vs ACO
+    fig, runtime_axis = plt.subplots(figsize=(2.8, 2.45))
     sizes = maps["n_deliveries"].map({20: 22, 50: 36}).to_numpy()
     colors = maps["n_deliveries"].map(
         {20: COLORS["neutral"], 50: COLORS["positive"]}
@@ -627,8 +618,10 @@ def _runtime_advantage(
         fontsize=6.5,
     )
     _panel_label(runtime_axis, "(a)")
+    _save(fig, output_dir, "fig4_runtime_advantage_a")
 
-    cpu_axis = axes[1]
+    # Panel (b): family-median CPU time, MGA vs ACO
+    fig, cpu_axis = plt.subplots(figsize=(2.8, 2.45))
     positions = np.arange(len(speed))
     width = 0.36
     cpu_axis.bar(
@@ -652,8 +645,10 @@ def _runtime_advantage(
     cpu_axis.grid(axis="y", color=COLORS["grid"], linewidth=0.45)
     cpu_axis.legend(frameon=False, ncol=2, loc="upper left")
     _panel_label(cpu_axis, "(b)")
+    _save(fig, output_dir, "fig4_runtime_advantage_b")
 
-    speed_axis = axes[2]
+    # Panel (c): ACO/MGA CPU ratio
+    fig, speed_axis = plt.subplots(figsize=(2.5, 2.45))
     y_positions = np.arange(len(speed))
     x_error = np.vstack(
         [
@@ -688,8 +683,8 @@ def _runtime_advantage(
         fontsize=6.5,
     )
     _panel_label(speed_axis, "(c)")
-    fig.subplots_adjust(left=0.075, right=0.99, top=0.95, bottom=0.2)
-    _save(fig, output_dir, "fig4_runtime_advantage")
+    _save(fig, output_dir, "fig4_runtime_advantage_c")
+
     _write_figure_data(
         maps[
             [
@@ -835,8 +830,6 @@ def _plot_route_map(
     route: Sequence[Tuple[int, int]],
     dynamic_grid: np.ndarray,
     algorithm: str,
-    cost: float,
-    exposure: float,
 ) -> None:
     display = np.zeros_like(grid, dtype=int)
     display[grid == CELL_NFZ] = 1
@@ -861,10 +854,6 @@ def _plot_route_map(
         route_array[:, 0],
         color=COLORS[algorithm],
         linewidth=0.75,
-    )
-    axis.set_title(
-        f"{algorithm}: cost {cost:.0f}, exposure {exposure:.0f}",
-        color=COLORS[algorithm],
     )
     axis.set_xticks([])
     axis.set_yticks([])
@@ -897,54 +886,37 @@ def _representative_route(
             environment["paths"],
         ),
     }
-    fig, axes = plt.subplots(
-        1,
-        3,
-        figsize=(7.15, 2.45),
-        gridspec_kw={"width_ratios": [1, 1, 1.25], "wspace": 0.24},
-    )
-    _plot_route_map(
-        axes[0],
-        environment["grid"],
-        routes["MGA"],
-        dynamic_grid,
-        "MGA",
-        float(mga_run["generalized_cost"]),
-        float(mga_run["exposure_cells"]),
-    )
-    _plot_route_map(
-        axes[1],
-        environment["grid"],
-        routes["ACO"],
-        dynamic_grid,
-        "ACO",
-        float(aco_run["generalized_cost"]),
-        float(aco_run["exposure_cells"]),
-    )
-    axes[0].text(
-        0.01,
-        0.99,
-        "(a)",
-        transform=axes[0].transAxes,
-        ha="left",
-        va="top",
-        fontsize=8,
-        fontweight="bold",
-        bbox={"facecolor": "white", "edgecolor": "none", "pad": 1.0},
-    )
-    axes[1].text(
-        0.01,
-        0.99,
-        "(b)",
-        transform=axes[1].transAxes,
-        ha="left",
-        va="top",
-        fontsize=8,
-        fontweight="bold",
-        bbox={"facecolor": "white", "edgecolor": "none", "pad": 1.0},
-    )
 
-    profile_axis = axes[2]
+    corner_labels = {"MGA": "(a)", "ACO": "(b)"}
+    corner_stems = {"MGA": "a", "ACO": "b"}
+    for algorithm in ALGORITHMS:
+        fig, axis = plt.subplots(figsize=(2.35, 2.25))
+        _plot_route_map(
+            axis,
+            environment["grid"],
+            routes[algorithm],
+            dynamic_grid,
+            algorithm,
+        )
+        axis.text(
+            0.01,
+            0.99,
+            corner_labels[algorithm],
+            transform=axis.transAxes,
+            ha="left",
+            va="top",
+            fontsize=8,
+            fontweight="bold",
+            bbox={"facecolor": "white", "edgecolor": "none", "pad": 1.0},
+        )
+        _save(
+            fig,
+            output_dir,
+            f"fig5_representative_route_{corner_stems[algorithm]}",
+        )
+
+    # Panel (c): required-altitude profile
+    fig, profile_axis = plt.subplots(figsize=(2.9, 2.25))
     required = environment["env3d"].required_altitude_map()
     profile_rows: List[Dict[str, float]] = []
     for algorithm in ALGORITHMS:
@@ -971,22 +943,12 @@ def _representative_route(
                     "required_altitude_m": altitude,
                 }
             )
-    profile_axis.set_title("Required-altitude profile")
     profile_axis.set_xlabel("Distance along realized grid path (km)")
     profile_axis.set_ylabel("Required altitude (m)")
     profile_axis.grid(color=COLORS["grid"], linewidth=0.45)
     profile_axis.legend(frameon=False)
     _panel_label(profile_axis, "(c)")
-    fig.suptitle(
-        (
-            f"S7 representative median-effect map, seed {environment_seed}; "
-            "moving-NFZ snapshot at $t=400$"
-        ),
-        y=0.995,
-        fontsize=8.2,
-    )
-    fig.subplots_adjust(left=0.04, right=0.99, top=0.85, bottom=0.15)
-    _save(fig, output_dir, "fig5_representative_route")
+    _save(fig, output_dir, "fig5_representative_route_c")
 
     selected = pd.DataFrame(
         [
@@ -1130,8 +1092,8 @@ def main() -> int:
         data_dir,
     )
     print(
-        "[figures] Wrote five main composite figures, two supplementary "
-        f"figures, and source CSVs to {args.output.resolve()}"
+        "[figures] Wrote five main figures as single panels, two "
+        f"supplementary figures, and source CSVs to {args.output.resolve()}"
     )
     return 0
 
