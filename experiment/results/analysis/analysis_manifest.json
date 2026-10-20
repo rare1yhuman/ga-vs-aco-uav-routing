@@ -1,0 +1,26 @@
+{
+  "status": "complete",
+  "raw_results_sha256": "3017ef7c2cc28ee194409a02a746d2e18a342bb8cd4e37386e6e7e85a4e1be04",
+  "rows": 700,
+  "independent_maps": 70,
+  "optimizer_repeats_per_map": 5,
+  "bootstrap_seed": 20260729,
+  "bootstrap_iterations": 10000,
+  "independent_unit": "environment map",
+  "multiple_testing": {
+    "cost": "Holm across seven families",
+    "physical_distance": "Holm across seven families",
+    "cpu_time": "Holm across seven families",
+    "dynamic_safety": "Holm across S3, S5, S7",
+    "dynamic_exposure": "Holm across S3, S5, S7",
+    "scale_interaction": "Holm across static and dynamic comparisons"
+  },
+  "timing_columns": [
+    "cpu_time_s",
+    "history_cpu_s",
+    "history_wall_s",
+    "native_cpu_time_s",
+    "native_wall_time_s",
+    "wall_time_s"
+  ]
+}

@@ -1,0 +1,4 @@
+family,maps,mga_safety_rate,aco_safety_rate,median_map_safety_delta,safety_map_p_wilcoxon,safety_rank_biserial,mga_median_exposure,aco_median_exposure,median_exposure_reduction,exposure_p_wilcoxon,exposure_rank_biserial,mga_only_safe_pairs,aco_only_safe_pairs,mcnemar_descriptive_p,safety_p_holm,exposure_p_holm
+S3,10,0.1,0.24,0.0,0.5,-1.0,6.5,7.0,0.0,1.0,0.0,0,7,0.015625,1.0,1.0
+S5,10,0.5,0.5,0.0,1.0,0.0,1.0,1.0,0.0,1.0,0.3333333333333333,0,0,1.0,1.0,1.0
+S7,10,0.2,0.1,0.0,0.75,0.4,6.0,6.0,2.0,0.208984375,0.4727272727272727,9,4,0.266845703125,1.0,0.626953125

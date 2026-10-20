@@ -1,0 +1,15 @@
+family,algo,runs,attained_runs,attainment_rate,conditional_median_target_cpu_s,conditional_median_target_wall_s,median_final_cpu_s,conditional_time_note
+S1,ACO,50,50,1.0,0.8501971274999979,0.8521504589880351,84.03516191400001,Median among attained runs; interpret with attainment_rate
+S1,MGA,50,50,1.0,0.2828798080000026,0.28301672052475624,25.636515527999997,Median among attained runs; interpret with attainment_rate
+S2,ACO,50,50,1.0,1.2025937624999994,1.2851779449847527,84.585829503,Median among attained runs; interpret with attainment_rate
+S2,MGA,50,50,1.0,0.2627871385,0.28169256399269216,25.922265727000003,Median among attained runs; interpret with attainment_rate
+S3,ACO,50,40,0.8,2.6994675379999986,2.707369451993145,84.882262575,Median among attained runs; interpret with attainment_rate
+S3,MGA,50,50,1.0,0.3103734385,0.31047361600212753,26.151416252999997,Median among attained runs; interpret with attainment_rate
+S4,ACO,50,50,1.0,0.8637109235000034,0.8636468700133264,85.547513854,Median among attained runs; interpret with attainment_rate
+S4,MGA,50,50,1.0,0.2574113305,0.25842438099789433,25.669850383999997,Median among attained runs; interpret with attainment_rate
+S5,ACO,50,44,0.88,1.2788075219999975,1.2785829909989843,85.30132449749999,Median among attained runs; interpret with attainment_rate
+S5,MGA,50,50,1.0,0.2605172824999987,0.26060000200232025,26.041457854,Median among attained runs; interpret with attainment_rate
+S6,ACO,50,15,0.3,115.69504974199998,115.71150388100068,411.1371070215,Median among attained runs; interpret with attainment_rate
+S6,MGA,50,49,0.98,3.2552897930000313,3.2555007220071275,126.5208675465,Median among attained runs; interpret with attainment_rate
+S7,ACO,50,7,0.14,222.757369611,223.03593972200179,413.15102957650004,Median among attained runs; interpret with attainment_rate
+S7,MGA,50,49,0.98,3.5198289619999628,3.5202797270030715,129.61966367500003,Median among attained runs; interpret with attainment_rate

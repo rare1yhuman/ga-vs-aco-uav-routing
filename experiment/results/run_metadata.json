@@ -1,0 +1,198 @@
+{
+  "status": "complete",
+  "protocol": "independent-map-paired-v2",
+  "families": [
+    "S1",
+    "S2",
+    "S3",
+    "S4",
+    "S5",
+    "S6",
+    "S7"
+  ],
+  "scenario_definitions": {
+    "S1": {
+      "label": "2D control",
+      "n_deliveries": 20,
+      "nfz_count": 0,
+      "has_nfz": false,
+      "dynamic": false,
+      "use_3d": false,
+      "n_linear": 0,
+      "n_osc": 0
+    },
+    "S2": {
+      "label": "2D static",
+      "n_deliveries": 20,
+      "nfz_count": 18,
+      "has_nfz": true,
+      "dynamic": false,
+      "use_3d": false,
+      "n_linear": 0,
+      "n_osc": 0
+    },
+    "S3": {
+      "label": "2D dynamic",
+      "n_deliveries": 20,
+      "nfz_count": 10,
+      "has_nfz": true,
+      "dynamic": true,
+      "use_3d": false,
+      "n_linear": 4,
+      "n_osc": 4
+    },
+    "S4": {
+      "label": "3D-aware static",
+      "n_deliveries": 20,
+      "nfz_count": 18,
+      "has_nfz": true,
+      "dynamic": false,
+      "use_3d": true,
+      "n_linear": 0,
+      "n_osc": 0
+    },
+    "S5": {
+      "label": "3D-aware dynamic",
+      "n_deliveries": 20,
+      "nfz_count": 18,
+      "has_nfz": true,
+      "dynamic": true,
+      "use_3d": true,
+      "n_linear": 3,
+      "n_osc": 3
+    },
+    "S6": {
+      "label": "3D-aware static scalability",
+      "n_deliveries": 50,
+      "nfz_count": 18,
+      "has_nfz": true,
+      "dynamic": false,
+      "use_3d": true,
+      "n_linear": 0,
+      "n_osc": 0
+    },
+    "S7": {
+      "label": "3D-aware dynamic scalability",
+      "n_deliveries": 50,
+      "nfz_count": 18,
+      "has_nfz": true,
+      "dynamic": true,
+      "use_3d": true,
+      "n_linear": 4,
+      "n_osc": 4
+    }
+  },
+  "environment_seeds": [
+    42,
+    88,
+    99,
+    123,
+    219,
+    220,
+    221,
+    226,
+    229,
+    236
+  ],
+  "optimizer_seeds": [
+    2000,
+    2001,
+    2002,
+    2003,
+    2004
+  ],
+  "workers": 4,
+  "expected_rows": 700,
+  "config_path": "config/paper_protocol_v2_optimized.json",
+  "config_sha256": "8d7a266fecce7207a0f0771f03e995bd13b311ae9fb2522b6c5341e89942f379",
+  "params_hash": "8c10cbccc167ff038fceb071ba8b840c1b48e34dbf8788330cef89f4d3389c05",
+  "protocol_config": {
+    "name": "independent-map-paired-v2",
+    "status": "calibrated",
+    "candidate_constructions_per_run": 100000,
+    "calibration_environment_seeds": [
+      314160,
+      271830
+    ],
+    "calibration_optimizer_seeds": [
+      9100,
+      9101,
+      9102,
+      9103,
+      9104
+    ],
+    "final_environment_seeds": [
+      42,
+      88,
+      99,
+      123,
+      219,
+      220,
+      221,
+      226,
+      229,
+      236
+    ],
+    "final_optimizer_seeds": [
+      2000,
+      2001,
+      2002,
+      2003,
+      2004
+    ],
+    "selection_rule": "feasibility, median normalized cost, variance, CPU time",
+    "calibration_results": "calibration_optimized/calibration_results.csv",
+    "calibration_ranking": "calibration_optimized/calibration_ranking.csv",
+    "calibration_results_sha256": "505edae94fb0258cd24f66572555485f225888e1a975e43b52f1339f25692743"
+  },
+  "ga": {
+    "pop_size": 250,
+    "generations": 399,
+    "crossover_rate": 0.95,
+    "mutation_rate": 0.2,
+    "tournament_k": 3,
+    "elitism_frac": 0.02,
+    "two_opt_max_iter": 75,
+    "two_opt_every_n": 5,
+    "or_opt_every_n": 5,
+    "local_search_top_frac": 0.05,
+    "initial_local_search_frac": 0.15,
+    "local_search_candidate_k": 12,
+    "final_refine_candidate_k": 20,
+    "exhaustive_final_max_n": 25,
+    "final_refine_best": true,
+    "early_stop_patience": null,
+    "stagnation_window": 30,
+    "adaptive_mut_boost": 2.0,
+    "inject_frac": 0.2,
+    "inject_after": 60,
+    "crossover_ops": [
+      "ox1",
+      "pmx",
+      "erx"
+    ],
+    "crossover_probs": [
+      0.45,
+      0.25,
+      0.3
+    ],
+    "fitness_fn_authoritative": true
+  },
+  "aco": {
+    "num_ants": 250,
+    "max_iter": 400,
+    "alpha": 2.0,
+    "beta": 3.0,
+    "rho_global": 0.05,
+    "rho_local": 0.02,
+    "q0": 0.7,
+    "candidate_list_size": 20
+  },
+  "python": "3.13.5 (main, Jul 15 2026, 20:25:40) [GCC 14.2.0]",
+  "platform": "Linux-6.12.94+deb13-amd64-x86_64-with-glibc2.41",
+  "pid": 22458,
+  "timestamp": "2026-07-29 11:41:47",
+  "elapsed_wall_s": 26329.897851960035,
+  "actual_rows": 700,
+  "failures": []
+}

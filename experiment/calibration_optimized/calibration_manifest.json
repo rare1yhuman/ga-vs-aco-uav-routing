@@ -1,0 +1,16 @@
+{
+  "rng_seed": 20260726,
+  "config_count": 24,
+  "optimizer_seeds": [
+    9100,
+    9101,
+    9102,
+    9103,
+    9104
+  ],
+  "environment_seeds": [
+    314160,
+    271830
+  ],
+  "candidate_hash": "6af5f552a2113344e7ff1e125cd18f5b850c6f385a8f5415ab54c9ab38c1b5c6"
+}

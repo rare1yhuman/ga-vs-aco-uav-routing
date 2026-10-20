@@ -1,0 +1,24 @@
+{
+  "status": "complete",
+  "protocol": "independent-map-paired-v2",
+  "family": "S7",
+  "environment_seed": 229,
+  "params_hash": "8c10cbccc167ff038fceb071ba8b840c1b48e34dbf8788330cef89f4d3389c05",
+  "algorithms": {
+    "MGA": {
+      "median_generalized_cost": 255580.0,
+      "mean_generalized_cost": 255580.0,
+      "median_cpu_time_s": 136.26567577100002,
+      "dynamic_safety_rate": 0.0,
+      "n": 5
+    },
+    "ACO": {
+      "median_generalized_cost": 255780.0,
+      "mean_generalized_cost": 257828.0,
+      "median_cpu_time_s": 375.39710339600003,
+      "dynamic_safety_rate": 0.0,
+      "n": 5
+    }
+  },
+  "error_count": 0
+}

@@ -1,0 +1,3 @@
+family,environment_seed,algorithm,optimizer_seed,generalized_cost,physical_distance_m,exposure_cells,selection_rule
+S7,220,MGA,2001,218840.0,153200.0,14.0,map closest to S7 median cost gain; run closest to algorithm map-median cost
+S7,220,ACO,2000,224180.0,158600.0,7.0,map closest to S7 median cost gain; run closest to algorithm map-median cost
